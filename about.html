@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - عقيق يمني أصيل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <span>🚚 شحن مجاني للطلبات فوق 500 ريال | ✅ ضمان أصالة 100%</span>
+                <span>📞 للطلب: +966 50 123 4567</span>
+            </div>
+        </div>
+        <div class="header-main">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <div class="logo-icon">💎</div>
+                    <div class="logo-text">
+                        <h1>عقيق يمني أصيل</h1>
+                        <span>متجر الأحجار الكريمة والسبح</span>
+                    </div>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="products.html">المنتجات</a></li>
+                    <li><a href="about.html" class="active">من نحن</a></li>
+                    <li><a href="contact.html">اتصل بنا</a></li>
+                    <li><a href="admin.html">⚙️ الإدارة</a></li>
+                </ul>
+                <div class="header-actions">
+                    <button class="cart-btn" onclick="toggleCart()">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cartCount">0</span>
+                    </button>
+                    <a href="https://wa.me/966501234567" class="whatsapp-btn-header" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
+                        واتساب
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section style="padding: 80px 0; background: var(--white); min-height: 70vh;">
+        <div class="container" style="max-width: 800px;">
+            <div class="section-title">
+                <h3>من نحن</h3>
+                <p>قصتنا مع العقيق اليمني</p>
+                <div class="line"></div>
+            </div>
+            <div style="font-size: 17px; line-height: 2.2; color: var(--gray);">
+                <p style="margin-bottom: 25px;">
+                    نحن متجر متخصص في بيع <strong>العقيق اليمني الأصلي</strong> والأحجار الكريمة والسبح الفاخرة. 
+                    نقدم لعملائنا تشكيلة فريدة من المنتجات المصنوعة يدوياً بأعلى معايير الجودة.
+                </p>
+                <p style="margin-bottom: 25px;">
+                    هدفنا هو إيصال جمال العقيق اليمني الأصيل إلى كل بيت، مع ضمان الأصالة والجودة في كل قطعة.
+                    نؤمن بأن كل حجر يحكي قصة، وكل مسباح يحمل تراثاً عريقاً.
+                </p>
+                
+                <div style="background: linear-gradient(135deg, var(--light), #fff); padding: 35px; border-radius: var(--radius); margin: 40px 0; border-right: 4px solid var(--primary);">
+                    <h4 style="color: var(--primary); margin-bottom: 20px; font-size: 22px;">💎 لماذا تختارنا؟</h4>
+                    <ul style="list-style: none; padding: 0;">
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--gold); font-size: 20px;">✓</span>
+                            <span>منتجات أصلية 100% مع شهادات ضمان</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--gold); font-size: 20px;">✓</span>
+                            <span>أسعار تنافسية مباشرة من المصدر</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--gold); font-size: 20px;">✓</span>
+                            <span>شحن آمن وتوصيل سريع لجميع المناطق</span>
+                        </li>
+                        <li style="margin-bottom: 15px; display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--gold); font-size: 20px;">✓</span>
+                            <span>خدمة عملاء متميزة على مدار الساعة</span>
+                        </li>
+                        <li style="display: flex; align-items: center; gap: 12px;">
+                            <span style="color: var(--gold); font-size: 20px;">✓</span>
+                            <span>سياسة إرجاع مرنة خلال 14 يوم</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; margin-top: 40px;">
+                    <div style="text-align: center; padding: 30px; background: var(--light); border-radius: var(--radius);">
+                        <div style="font-size: 36px; font-weight: 900; color: var(--primary);">500+</div>
+                        <div style="color: var(--gray); margin-top: 5px;">عميل سعيد</div>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: var(--light); border-radius: var(--radius);">
+                        <div style="font-size: 36px; font-weight: 900; color: var(--primary);">200+</div>
+                        <div style="color: var(--gray); margin-top: 5px;">منتج متنوع</div>
+                    </div>
+                    <div style="text-align: center; padding: 30px; background: var(--light); border-radius: var(--radius);">
+                        <div style="font-size: 36px; font-weight: 900; color: var(--primary);">5+</div>
+                        <div style="color: var(--gray); margin-top: 5px;">سنوات خبرة</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>عن المتجر</h4>
+                    <p>متجر متخصص في بيع العقيق اليمني الأصلي والأحجار الكريمة والسبح الفاخرة.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-snapchat"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>روابط سريعة</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="products.html">المنتجات</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="contact.html">اتصل بنا</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>سياسات المتجر</h4>
+                    <ul class="footer-links">
+                        <li><a href="privacy.html">سياسة الخصوصية</a></li>
+                        <li><a href="return.html">سياسة الإرجاع</a></li>
+                        <li><a href="terms.html">شروط الاستخدام</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section footer-contact">
+                    <h4>تواصل معنا</h4>
+                    <p><i class="fab fa-whatsapp"></i> +966 50 123 4567</p>
+                    <p><i class="fas fa-phone"></i> +966 50 123 4567</p>
+                    <p><i class="fas fa-envelope"></i> info@yemeni-agates.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 عقيق يمني أصيل. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>🛒 سلة التسوق</h3>
+            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <div class="cart-empty">
+                <i class="fas fa-shopping-cart"></i>
+                <p>السلة فارغة</p>
+            </div>
+        </div>
+        <div class="cart-footer" id="cartFooter" style="display: none;">
+            <div class="cart-total">
+                <span>الإجمالي:</span>
+                <span id="cartTotal">0 ريال</span>
+            </div>
+            <button class="checkout-btn" onclick="checkoutWhatsApp()">
+                <i class="fab fa-whatsapp"></i>
+                إتمام الطلب عبر واتساب
+            </button>
+        </div>
+    </div>
+
+    <div class="whatsapp-float">
+        <a href="https://wa.me/966501234567" target="_blank">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toastMessage">تمت الإضافة للسلة</span>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
