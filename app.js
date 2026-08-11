@@ -1,69 +1,124 @@
-// بيانات المنتجات (يمكنك تعديلها وإضافة المزيد)
+// قائمة المنتجات مع دعم التعديل وإضافة صور حقيقية
 const products = [
-    { id: 1, name: 'خاتم عقيق يمني كبدي', category: 'عقيق', price: 450, oldPrice: 600, badge: 'new', imageIcon: 'fa-ring' },
-    { id: 2, name: 'مسباح يسر مطعم بفضة', category: 'مسباح', price: 250, oldPrice: null, badge: 'hot', imageIcon: 'fa-praying-hands' },
-    { id: 3, name: 'سبحة عقيق يماني أصلي', category: 'سبح', price: 350, oldPrice: 420, badge: 'sale', imageIcon: 'fa-gem' },
-    { id: 4, name: 'حجر زمرد طبيعي', category: 'أحجار كريمة', price: 1200, oldPrice: 1500, badge: null, imageIcon: 'fa-gem' },
-    { id: 5, name: 'خاتم عقيق شرف الشمس', category: 'عقيق', price: 300, oldPrice: null, badge: 'new', imageIcon: 'fa-ring' },
-    { id: 6, name: 'سبحة كهرمان', category: 'سبح', price: 550, oldPrice: 650, badge: 'sale', imageIcon: 'fa-gem' }
+    { 
+        id: 1, 
+        name: 'خاتم عقيق يمني كبدي', 
+        category: 'عقيق', 
+        price: 450, 
+        oldPrice: 600, 
+        badge: 'new', 
+        image: '', 
+        imageIcon: 'fa-ring' 
+    },
+    { 
+        id: 2, 
+        name: 'مسباح يسر مطعم بفضة', 
+        category: 'مسباح', 
+        price: 250, 
+        oldPrice: null, 
+        badge: 'hot', 
+        image: '', 
+        imageIcon: 'fa-praying-hands' 
+    },
+    { 
+        id: 3, 
+        name: 'سبحة عقيق يماني أصلي', 
+        category: 'سبح', 
+        price: 350, 
+        oldPrice: 420, 
+        badge: 'sale', 
+        image: '', 
+        imageIcon: 'fa-gem' 
+    },
+    { 
+        id: 4, 
+        name: 'حجر زمرد طبيعي', 
+        category: 'أحجار كريمة', 
+        price: 1200, 
+        oldPrice: 1500, 
+        badge: null, 
+        image: '', 
+        imageIcon: 'fa-gem' 
+    },
+    { 
+        id: 5, 
+        name: 'خاتم عقيق شرف الشمس', 
+        category: 'عقيق', 
+        price: 300, 
+        oldPrice: null, 
+        badge: 'new', 
+        image: '', 
+        imageIcon: 'fa-ring' 
+    },
+    { 
+        id: 6, 
+        name: 'سبحة كهرمان', 
+        category: 'سبح', 
+        price: 550, 
+        oldPrice: 650, 
+        badge: 'sale', 
+        image: '', 
+        imageIcon: 'fa-gem' 
+    }
 ];
 
-// السلة
+const PRIMARY_WHATSAPP_NUMBER = "967734931886";
+
 let cart = JSON.parse(localStorage.getItem('yemeniAgateCart')) || [];
 
-// تهيئة الصفحة عند التحميل
 document.addEventListener('DOMContentLoaded', () => {
     updateCartCount();
     renderCart();
     
-    // عرض المنتجات المميزة في الصفحة الرئيسية
     const featuredContainer = document.getElementById('featuredProducts');
     if (featuredContainer) {
         renderProducts(products.slice(0, 4), featuredContainer);
     }
 
-    // عرض كل المنتجات في صفحة المنتجات
     const allProductsContainer = document.getElementById('allProducts');
     if (allProductsContainer) {
         renderProducts(products, allProductsContainer);
     }
 });
 
-// دالة عرض المنتجات
 function renderProducts(productsArray, container) {
-    container.innerHTML = productsArray.map(product => `
-        <div class="product-card">
-            <div class="product-image">
-                <i class="fas ${product.imageIcon}"></i>
-                <div class="product-badges">
-                    ${product.badge === 'new' ? '<span class="product-badge badge-new">جديد</span>' : ''}
-                    ${product.badge === 'sale' ? '<span class="product-badge badge-sale">تخفيض</span>' : ''}
-                    ${product.badge === 'hot' ? '<span class="product-badge badge-hot">الأكثر مبيعاً</span>' : ''}
+    container.innerHTML = productsArray.map(product => {
+        const imageContent = product.image 
+            ? `<img src="${product.image}" alt="${product.name}">`
+            : `<i class="fas ${product.imageIcon}"></i>`;
+
+        return `
+            <div class="product-card">
+                <div class="product-image">
+                    ${imageContent}
+                    <div class="product-badges">
+                        ${product.badge === 'new' ? '<span class="product-badge badge-new">جديد</span>' : ''}
+                        ${product.badge === 'sale' ? '<span class="product-badge badge-sale">تخفيض</span>' : ''}
+                        ${product.badge === 'hot' ? '<span class="product-badge badge-hot">الأكثر مبيعاً</span>' : ''}
+                    </div>
+                    <div class="product-actions">
+                        <button class="action-btn add-cart" onclick="addToCart(${product.id})">
+                            <i class="fas fa-cart-plus"></i>
+                        </button>
+                        <a href="https://wa.me/${PRIMARY_WHATSAPP_NUMBER}?text=مرحباً، أريد الاستفسار عن منتج: ${product.name}" class="action-btn whatsapp" target="_blank">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
                 </div>
-                <div class="product-actions">
-                    <button class="action-btn add-cart" onclick="addToCart(${product.id})">
-                        <i class="fas fa-cart-plus"></i>
-                    </button>
-                    <a href="https://wa.me/966501234567?text=مرحباً، أريد الاستفسار عن منتج: ${product.name}" class="action-btn whatsapp" target="_blank">
-                        <i class="fab fa-whatsapp"></i>
-                    </a>
+                <div class="product-info">
+                    <div class="product-category">${product.category}</div>
+                    <h4 class="product-name">${product.name}</h4>
+                    <div class="product-price">
+                        <span class="current-price">${product.price} ريال</span>
+                        ${product.oldPrice ? `<span class="old-price">${product.oldPrice} ريال</span>` : ''}
+                    </div>
                 </div>
             </div>
-            <div class="product-info">
-                <div class="product-category">${product.category}</div>
-                <h4 class="product-name">${product.name}</h4>
-                <div class="product-price">
-                    <span class="current-price">${product.price} ريال</span>
-                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice} ريال</span>` : ''}
-                </div>
-            </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 }
 
-// فلترة المنتجات (في صفحة المنتجات)
 function filterProducts(category) {
-    // تفعيل الزر النشط
     document.querySelectorAll('.filter-tab').forEach(tab => {
         tab.classList.remove('active');
         if (tab.textContent.trim() === category || (category === 'all' && tab.textContent.trim() === 'الكل')) {
@@ -82,7 +137,6 @@ function filterProducts(category) {
     }
 }
 
-// التحكم بالسلة
 function toggleCart() {
     document.getElementById('cartSidebar').classList.toggle('active');
     document.getElementById('cartOverlay').classList.toggle('active');
@@ -146,30 +200,35 @@ function renderCart() {
         return;
     }
 
-    cartItemsContainer.innerHTML = cart.map(item => `
-        <div class="cart-item">
-            <button class="remove-item" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
-            <div class="cart-item-image">
-                <i class="fas ${item.imageIcon}"></i>
-            </div>
-            <div class="cart-item-details">
-                <div class="cart-item-name">${item.name}</div>
-                <div class="cart-item-price">${item.price} ريال</div>
-                <div class="cart-item-qty">
-                    <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
-                    <span>${item.quantity}</span>
-                    <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+    cartItemsContainer.innerHTML = cart.map(item => {
+        const imageContent = item.image 
+            ? `<img src="${item.image}" alt="${item.name}">`
+            : `<i class="fas ${item.imageIcon}"></i>`;
+
+        return `
+            <div class="cart-item">
+                <button class="remove-item" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
+                <div class="cart-item-image">
+                    ${imageContent}
+                </div>
+                <div class="cart-item-details">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-price">${item.price} ريال</div>
+                    <div class="cart-item-qty">
+                        <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+                        <span>${item.quantity}</span>
+                        <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `).join('');
+        `;
+    }).join('');
 
     const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
     if (cartTotalElement) cartTotalElement.textContent = `${total} ريال`;
     if (cartFooter) cartFooter.style.display = 'block';
 }
 
-// عرض رسالة التنبيه (Toast)
 function showToast() {
     const toast = document.getElementById('toast');
     if (!toast) return;
@@ -180,7 +239,6 @@ function showToast() {
     }, 3000);
 }
 
-// إتمام الطلب عبر الواتساب
 function checkoutWhatsApp() {
     if (cart.length === 0) return;
 
@@ -194,6 +252,6 @@ function checkoutWhatsApp() {
 
     text += `%0A*الإجمالي الكلي: ${total} ريال*%0A%0Aالرجاء تزويدي بتفاصيل الدفع والشحن.`;
     
-    const whatsappUrl = `https://wa.me/966501234567?text=${text}`;
+    const whatsappUrl = `https://wa.me/${PRIMARY_WHATSAPP_NUMBER}?text=${text}`;
     window.open(whatsappUrl, '_blank');
 }

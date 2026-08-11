@@ -502,7 +502,7 @@ body {
 .current-price { font-size: 22px; font-weight: 900; color: var(--primary); }
 .old-price { font-size: 16px; color: var(--gray); text-decoration: line-through; }
 
-/* ===== CART SIDEBAR (تعديل الهيكل ليبدأ من اليمين بشكل صحيح) ===== */
+/* ===== CART SIDEBAR ===== */
 .cart-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -518,14 +518,14 @@ body {
 .cart-sidebar {
     position: fixed;
     top: 0;
-    right: 0; /* التموضع باليمين للمتجر العربي */
+    right: 0;
     left: auto;
     width: 400px;
     max-width: 90vw;
     height: 100vh;
     background: var(--white);
     z-index: 2001;
-    transform: translateX(100%); /* الإخفاء جهة اليمين */
+    transform: translateX(100%);
     transition: transform 0.4s ease;
     display: flex;
     flex-direction: column;
