@@ -1,125 +1,199 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اتصل بنا - عقيق يمني أصيل</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+// بيانات المنتجات (يمكنك تعديلها وإضافة المزيد)
+const products = [
+    { id: 1, name: 'خاتم عقيق يمني كبدي', category: 'عقيق', price: 450, oldPrice: 600, badge: 'new', imageIcon: 'fa-ring' },
+    { id: 2, name: 'مسباح يسر مطعم بفضة', category: 'مسباح', price: 250, oldPrice: null, badge: 'hot', imageIcon: 'fa-praying-hands' },
+    { id: 3, name: 'سبحة عقيق يماني أصلي', category: 'سبح', price: 350, oldPrice: 420, badge: 'sale', imageIcon: 'fa-gem' },
+    { id: 4, name: 'حجر زمرد طبيعي', category: 'أحجار كريمة', price: 1200, oldPrice: 1500, badge: null, imageIcon: 'fa-gem' },
+    { id: 5, name: 'خاتم عقيق شرف الشمس', category: 'عقيق', price: 300, oldPrice: null, badge: 'new', imageIcon: 'fa-ring' },
+    { id: 6, name: 'سبحة كهرمان', category: 'سبح', price: 550, oldPrice: 650, badge: 'sale', imageIcon: 'fa-gem' }
+];
 
-    <header class="header">
-        <div class="header-top">
-            <div class="container">
-                <span>🚚 شحن مجاني للطلبات فوق 500 ريال | ✅ ضمان أصالة 100%</span>
-                <span>📞 تواصل معنا مباشرة عبر الواتساب</span>
-            </div>
-        </div>
-        <div class="header-main">
-            <div class="container">
-                <a href="index.html" class="logo">
-                    <div class="logo-icon">💎</div>
-                    <div class="logo-text">
-                        <h1>عقيق يمني أصيل</h1>
-                        <span>متجر الأحجار الكريمة والسبح</span>
-                    </div>
-                </a>
-                <ul class="nav-links">
-                    <li><a href="index.html">الرئيسية</a></li>
-                    <li><a href="products.html">المنتجات</a></li>
-                    <li><a href="about.html">من نحن</a></li>
-                    <li><a href="contact.html" class="active">اتصل بنا</a></li>
-                </ul>
-                <div class="header-actions">
-                    <button class="cart-btn" onclick="toggleCart()">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span class="cart-count" id="cartCount">0</span>
+// السلة
+let cart = JSON.parse(localStorage.getItem('yemeniAgateCart')) || [];
+
+// تهيئة الصفحة عند التحميل
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartCount();
+    renderCart();
+    
+    // عرض المنتجات المميزة في الصفحة الرئيسية
+    const featuredContainer = document.getElementById('featuredProducts');
+    if (featuredContainer) {
+        renderProducts(products.slice(0, 4), featuredContainer);
+    }
+
+    // عرض كل المنتجات في صفحة المنتجات
+    const allProductsContainer = document.getElementById('allProducts');
+    if (allProductsContainer) {
+        renderProducts(products, allProductsContainer);
+    }
+});
+
+// دالة عرض المنتجات
+function renderProducts(productsArray, container) {
+    container.innerHTML = productsArray.map(product => `
+        <div class="product-card">
+            <div class="product-image">
+                <i class="fas ${product.imageIcon}"></i>
+                <div class="product-badges">
+                    ${product.badge === 'new' ? '<span class="product-badge badge-new">جديد</span>' : ''}
+                    ${product.badge === 'sale' ? '<span class="product-badge badge-sale">تخفيض</span>' : ''}
+                    ${product.badge === 'hot' ? '<span class="product-badge badge-hot">الأكثر مبيعاً</span>' : ''}
+                </div>
+                <div class="product-actions">
+                    <button class="action-btn add-cart" onclick="addToCart(${product.id})">
+                        <i class="fas fa-cart-plus"></i>
                     </button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <section style="padding: 80px 0; background: var(--white); min-height: 70vh;">
-        <div class="container" style="max-width: 1000px;">
-            <div class="section-title">
-                <h3>أرقام التواصل والخدمة</h3>
-                <p>يمكنك التواصل المباشر مع أفراد فريقنا عبر الواتساب لخدمتك فوراً</p>
-                <div class="line"></div>
-            </div>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px;">
-                <!-- شادي السروري -->
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border: 1px solid #eee;">
-                    <i class="fab fa-whatsapp" style="font-size: 45px; margin-bottom: 15px; color: #25D366;"></i>
-                    <h4 style="margin-bottom: 8px; font-size: 20px; color: var(--dark);">شادي السروري</h4>
-                    <p style="margin-bottom: 20px; color: var(--gray); font-weight: bold; direction: ltr;">+967 772 676 757</p>
-                    <a href="https://wa.me/967772676757" class="btn-primary" style="background: #25D366; display: inline-block; padding: 10px 25px; font-size: 14px;" target="_blank">
-                        <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
-                    </a>
-                </div>
-
-                <!-- محمد مقبل -->
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border: 1px solid #eee;">
-                    <i class="fab fa-whatsapp" style="font-size: 45px; margin-bottom: 15px; color: #25D366;"></i>
-                    <h4 style="margin-bottom: 8px; font-size: 20px; color: var(--dark);">محمد مقبل</h4>
-                    <p style="margin-bottom: 20px; color: var(--gray); font-weight: bold; direction: ltr;">+967 730 413 413</p>
-                    <a href="https://wa.me/967730413413" class="btn-primary" style="background: #25D366; display: inline-block; padding: 10px 25px; font-size: 14px;" target="_blank">
-                        <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
-                    </a>
-                </div>
-
-                <!-- مازن الصانع -->
-                <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center; border: 1px solid #eee;">
-                    <i class="fab fa-whatsapp" style="font-size: 45px; margin-bottom: 15px; color: #25D366;"></i>
-                    <h4 style="margin-bottom: 8px; font-size: 20px; color: var(--dark);">مازن الصانع</h4>
-                    <p style="margin-bottom: 20px; color: var(--gray); font-weight: bold; direction: ltr;">+967 734 931 886</p>
-                    <a href="https://wa.me/967734931886" class="btn-primary" style="background: #25D366; display: inline-block; padding: 10px 25px; font-size: 14px;" target="_blank">
-                        <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+                    <a href="https://wa.me/967734931886?text=مرحباً، أريد الاستفسار عن منتج: ${product.name}" class="action-btn whatsapp" target="_blank">
+                        <i class="fab fa-whatsapp"></i>
                     </a>
                 </div>
             </div>
-
-            <div style="background: var(--light); padding: 30px; border-radius: var(--radius); text-align: center;">
-                <h4 style="color: var(--primary); margin-bottom: 10px; font-size: 20px;">📍 الموقع والتوصيل</h4>
-                <p style="color: var(--gray);">نوفر الشحن والتوصيل لكافة المحافظات اليمنية ولدول الخليج العربي.</p>
+            <div class="product-info">
+                <div class="product-category">${product.category}</div>
+                <h4 class="product-name">${product.name}</h4>
+                <div class="product-price">
+                    <span class="current-price">${product.price} ريال</span>
+                    ${product.oldPrice ? `<span class="old-price">${product.oldPrice} ريال</span>` : ''}
+                </div>
             </div>
         </div>
-    </section>
+    `).join('');
+}
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>© 2026 عقيق يمني أصيل. جميع الحقوق محفوظة.</p>
-            </div>
-        </div>
-    </footer>
+// فلترة المنتجات (في صفحة المنتجات)
+function filterProducts(category) {
+    // تفعيل الزر النشط
+    document.querySelectorAll('.filter-tab').forEach(tab => {
+        tab.classList.remove('active');
+        if (tab.textContent.trim() === category || (category === 'all' && tab.textContent.trim() === 'الكل')) {
+            tab.classList.add('active');
+        }
+    });
 
-    <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
-    <div class="cart-sidebar" id="cartSidebar">
-        <div class="cart-header">
-            <h3>🛒 سلة التسوق</h3>
-            <button class="close-cart" onclick="toggleCart()"><i class="fas fa-times"></i></button>
-        </div>
-        <div class="cart-items" id="cartItems">
+    const allProductsContainer = document.getElementById('allProducts');
+    if (!allProductsContainer) return;
+
+    if (category === 'all') {
+        renderProducts(products, allProductsContainer);
+    } else {
+        const filtered = products.filter(p => p.category === category);
+        renderProducts(filtered, allProductsContainer);
+    }
+}
+
+// التحكم بالسلة
+function toggleCart() {
+    document.getElementById('cartSidebar').classList.toggle('active');
+    document.getElementById('cartOverlay').classList.toggle('active');
+}
+
+function addToCart(productId) {
+    const product = products.find(p => p.id === productId);
+    const existingItem = cart.find(item => item.id === productId);
+
+    if (existingItem) {
+        existingItem.quantity += 1;
+    } else {
+        cart.push({ ...product, quantity: 1 });
+    }
+
+    saveCart();
+    showToast();
+}
+
+function removeFromCart(productId) {
+    cart = cart.filter(item => item.id !== productId);
+    saveCart();
+}
+
+function changeQuantity(productId, delta) {
+    const item = cart.find(i => i.id === productId);
+    if (item) {
+        item.quantity += delta;
+        if (item.quantity <= 0) removeFromCart(productId);
+        else saveCart();
+    }
+}
+
+function saveCart() {
+    localStorage.setItem('yemeniAgateCart', JSON.stringify(cart));
+    updateCartCount();
+    renderCart();
+}
+
+function updateCartCount() {
+    const count = cart.reduce((total, item) => total + item.quantity, 0);
+    const cartCountElement = document.getElementById('cartCount');
+    if (cartCountElement) cartCountElement.textContent = count;
+}
+
+function renderCart() {
+    const cartItemsContainer = document.getElementById('cartItems');
+    const cartFooter = document.getElementById('cartFooter');
+    const cartTotalElement = document.getElementById('cartTotal');
+    
+    if (!cartItemsContainer) return;
+
+    if (cart.length === 0) {
+        cartItemsContainer.innerHTML = `
             <div class="cart-empty">
                 <i class="fas fa-shopping-cart"></i>
                 <p>السلة فارغة</p>
             </div>
-        </div>
-        <div class="cart-footer" id="cartFooter" style="display: none;">
-            <div class="cart-total">
-                <span>الإجمالي:</span>
-                <span id="cartTotal">0 ريال</span>
-            </div>
-            <button class="checkout-btn" onclick="checkoutWhatsApp()">
-                <i class="fab fa-whatsapp"></i> إتمام الطلب عبر واتساب
-            </button>
-        </div>
-    </div>
+        `;
+        if (cartFooter) cartFooter.style.display = 'none';
+        return;
+    }
 
-    <script src="app.js"></script>
-</body>
-</html>
+    cartItemsContainer.innerHTML = cart.map(item => `
+        <div class="cart-item">
+            <button class="remove-item" onclick="removeFromCart(${item.id})"><i class="fas fa-trash"></i></button>
+            <div class="cart-item-image">
+                <i class="fas ${item.imageIcon}"></i>
+            </div>
+            <div class="cart-item-details">
+                <div class="cart-item-name">${item.name}</div>
+                <div class="cart-item-price">${item.price} ريال</div>
+                <div class="cart-item-qty">
+                    <button class="qty-btn" onclick="changeQuantity(${item.id}, 1)">+</button>
+                    <span>${item.quantity}</span>
+                    <button class="qty-btn" onclick="changeQuantity(${item.id}, -1)">-</button>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    if (cartTotalElement) cartTotalElement.textContent = `${total} ريال`;
+    if (cartFooter) cartFooter.style.display = 'block';
+}
+
+// عرض رسالة التنبيه (Toast)
+function showToast() {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    
+    toast.classList.add('show');
+    setTimeout(() => {
+        toast.classList.remove('show');
+    }, 3000);
+}
+
+// إتمام الطلب عبر الواتساب
+function checkoutWhatsApp() {
+    if (cart.length === 0) return;
+
+    let text = "مرحباً، أود إتمام هذا الطلب من المتجر:%0A%0A";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+        text += `${index + 1}. ${item.name} - العدد: ${item.quantity} - السعر: ${item.price * item.quantity} ريال%0A`;
+        total += (item.price * item.quantity);
+    });
+
+    text += `%0A*الإجمالي الكلي: ${total} ريال*%0A%0Aالرجاء تزويدي بتفاصيل الدفع والشحن.`;
+    
+    const whatsappUrl = `https://wa.me/967734931886?text=${text}`;
+    window.open(whatsappUrl, '_blank');
+}
